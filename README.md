@@ -1,24 +1,65 @@
-# README
+# Owners
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Function
+- ユーザー管理機能
+- プロジェクトの詳細ページ閲覧機能
+- 商品購入機能
+- (プロジェクトのレビュー機能)
 
-Things you may want to cover:
+## DataBase Design
 
-* Ruby version
+###Required Table
+- users table
+- producers table
+- projects table
+- comments table
 
-* System dependencies
+### Required Columun
 
-* Configuration
+#### users table
 
-* Database creation
+|center align      |center align      |
+|:----------------:|:----------------:|
+|name              |t.string, null: false|
+|mail              | t.string, null:false, unique: true|
+|password          |t.string, null: false|
 
-* Database initialization
+##### Association
+has_many :projects  
+has_many :producer, through :user_producers
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
+#### producers table
 
-* Deployment instructions
+|center align      |center align       |
+|:----------------:|:-----------------:|
+|name              |t.string, null:false|
+|address           |t.string, null: false|
 
-* ...
+
+##### Association
+has_one :project  
+has_many :users, through :user_producers
+
+#### projects table
+
+|center align       |center align       |
+|:-----------------:|:-----------------:|
+|name               |t.string, null: false|
+|price              |t.integer, null: false|
+|quantity           |t.integer, null: false|
+
+##### Association
+belongs_to :user  
+belongs_to :producer
+
+#### user_producers table
+
+|center align       |center align         |
+|:-----------------:|:-------------------:|
+|user               |t.reference, index: true, foreign_key: true|
+|group              |t.reference, index: true, foreign_key: true|
+
+##### Association
+belongs_to :user  
+belongs_to :producer
