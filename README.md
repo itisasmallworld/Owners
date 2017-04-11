@@ -18,12 +18,11 @@
 
 - #### users table
 
-|__columun name__   |__type__         |__charactristics__  |
+|__columun name__  |__type__          |__charactristics__  |
 |:----------------:|:----------------:|:------------------:|
 |name              |string            | null: false , unique: true       |
 |mail              | string           |null:false, unique: true|
 |password          |string            |null: false         |
-|project_id        |integer           |null: false         |
 |role              |string            |null: false         |
 
 ##### Association
@@ -34,12 +33,13 @@ has_many :rewards through :supports
 - #### projects table
 
 |__columun name__    |__type__           |__charactristics__|
-|:-----------------:|:-----------------:|:-----------------:|
-|name               |string|null: false|
-|area               |string|null: false|
-|title              |string|null: false|
-|content            |text  |null: false|
-|image              |string|null: false|
+|:------------------:|:-----------------:|:-----------------:|
+|name                |string             |null: false|
+|area                |string             |null: false|
+|title               |string             |null: false|
+|content             |text               |null: false|
+|main_image          |string             |null: false|
+|user_id             |integer            |null: false, foreign_key: true|
 
 ##### Association
 has_many :images  
@@ -50,13 +50,12 @@ belongs_to :user
 - #### images table
 
 |__columun name__  |__type__           |__charactristics__|
-|:----------------:|:-----------------:|:----------:|
-|image             |string|null:false|
-|project_id        |integer|null: false|
+|:----------------:|:-----------------:|:----------------:|
+|image             |string             |null:false|
+|project_id        |integer            |null: false, foreign_key: true|
 
 ##### Association
 belongs_to :project  
-belongs_to :user
 
 
 - #### rewards table
@@ -68,18 +67,20 @@ belongs_to :user
 |recruitment_capacity|integer |null: false|
 |recruitment_term|integer     |null: false|
 |name            |string      |null: false|
+|project_id      |integer     |null: false, foreign_key: true|
 
 ##### Association
-has_one :project  
+belongs_to :project  
 has_many :users, through: supports
 
 - #### supports table
 
 |__columun name__   |__type__             |__charactristics__|
-|:-----------------:|:-------------------:|:------------------:|
-|user               |integer              |index: true, foreign_key: true|
-|reward             |integer              |index :true, foreign_key: true|
+|:-----------------:|:-------------------:|:----------------:|
+|user_id            |integer              |index: true, foreign_key: true|
+|reward_id          |integer              |index :true, foreign_key: true|
 
 ##### Association
 belongs_to :user  
 belongs_to :reward
+
