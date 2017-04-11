@@ -8,62 +8,66 @@
 ## DataBase Design
 
 ###Required Table
-- persons table
-- image table
+- people table
+- images table
 - projects table
-- person_projects table
+- people_projects table
 
 ### Required Columun
 
-- #### persons table
+- #### people table
 
-|center align      |center align      |
-|:----------------:|:----------------:|
-|name              |t.string, null: false|
-|mail              | t.string, null:false, unique: true|
-|password          |t.string, null: false|
-|project_id        |t.integer, null: false|
+|center align      |center align      |  center align      |
+|:----------------:|:----------------:|:------------------:|
+|__columun name__   |__type__         |__charactristics__  |
+|name              |string            | null: false , unique: true       |
+|mail              | string           |null:false, unique: true|
+|password          |string            |null: false         |
+|project_id        |integer           |null: false         |
 
 ##### Association
 has_many :images  
-has_many :projects, through :person_projects
+has_many :projects, through :people_projects
 
 
 - #### projects table
 
-|center align       |center align       |
-|:-----------------:|:-----------------:|
-|name               |t.string, null: false|
-|price              |t.integer, null: false|
-|quantity           |t.integer, null: false|
-|address            |t.string, null: false|
+|center align       |center align       |center align       |
+|:-----------------:|:-----------------:|:-----------------:|
+|__columun name__    |__type__           |__charactristics__|
+|name               |string|null: false|
+|price              |integer|null: false|
+|quantity           |integer|null: false|
+|address            |string|null: false|
 
 ##### Association
 has_many :images  
-has_many :persons, through :person_projects
+has_many :people, through :people_projects
 
 
 - #### images table
 
-|center align      |center align       |
-|:----------------:|:-----------------:|
-|image             |t.string, null:false|
-|project_id        |t.integer, null: false|
+|center align      |center align       |center align|
+|:----------------:|:-----------------:|:----------:|
+|__columun name__  |__type__           |__charactristics__|
+|image             |string|null:false|
+|project_id        |integer|null: false|
 
 
 ##### Association
 belongs_to :project  
-belongs_to :person
+belongs_to :people
 
 
-- #### person_projects table
+- #### people_projects table
 
-|center align       |center align         |
-|:-----------------:|:-------------------:|
-|person             |t.reference, index: true, foreign_key: true|
-|projects           |t.reference, index: true, foreign_key: true|
-|role               |t.string, null: false|
+|center align       |center align         |center align        |
+|:-----------------:|:-------------------:|:------------------:|
+|__columun name__   |__type__             |__charactristics__|
+|people             |integer|index: true, foreign_key: true|
+|projects           |integer|index: true, foreign_key: true|
+|role               |string|null: false|
 
 ##### Association
-belongs_to :person  
+belongs_to :people  
 belongs_to :project
