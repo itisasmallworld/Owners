@@ -23,6 +23,7 @@
 |mail              | string           |null:false, unique: true|
 |password          |string            |null: false         |
 |project_id        |integer           |null: false         |
+|role               |string|null: false|
 
 ##### Association
 has_many :images  
@@ -50,7 +51,6 @@ has_many :people, through :people_projects
 |image             |string|null:false|
 |project_id        |integer|null: false|
 
-
 ##### Association
 belongs_to :project  
 belongs_to :people
@@ -62,7 +62,6 @@ belongs_to :people
 |:-----------------:|:-------------------:|:------------------:|
 |people             |integer|index: true, foreign_key: true|
 |projects           |integer|index: true, foreign_key: true|
-|role               |string|null: false|
 
 ##### Association
 belongs_to :people  
