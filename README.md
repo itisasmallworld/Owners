@@ -11,6 +11,7 @@
 - people table
 - images table
 - projects table
+- rewards table
 - people_projects table
 
 ### Required Columun
@@ -35,12 +36,11 @@ has_many :projects, through :people_projects
 |__columun name__    |__type__           |__charactristics__|
 |:-----------------:|:-----------------:|:-----------------:|
 |name               |string|null: false|
-|price              |integer|null: false|
-|quantity           |integer|null: false|
-|address            |string|null: false|
+|area               |string|null: false|
 
 ##### Association
 has_many :images  
+has_one  : reward  
 has_many :people, through :people_projects
 
 
@@ -54,6 +54,20 @@ has_many :people, through :people_projects
 ##### Association
 belongs_to :project  
 belongs_to :people
+
+
+- #### rewards table
+
+|__columun name__|__type__    |__charactristics__|
+|:--------------:|:----------:|:----------------:|
+|price           |integer     |null: false|
+|quantity        |integer     |null: false|
+|recruitment_capacity|integer |null: false|
+|recruitment_term|integer     |null: false|
+|name            |string      |null: false|
+
+##### Association
+belongs_to :project
 
 
 - #### people_projects table
