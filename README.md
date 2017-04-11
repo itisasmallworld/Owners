@@ -8,15 +8,15 @@
 ## DataBase Design
 
 ### Required Table
-- people table
+- users table
 - images table
 - projects table
 - rewards table
-- people_projects table
+- supports table
 
 ### Required Columun
 
-- #### people table
+- #### users table
 
 |__columun name__   |__type__         |__charactristics__  |
 |:----------------:|:----------------:|:------------------:|
@@ -24,11 +24,11 @@
 |mail              | string           |null:false, unique: true|
 |password          |string            |null: false         |
 |project_id        |integer           |null: false         |
-|role               |string|null: false|
+|role              |string            |null: false         |
 
 ##### Association
-has_many :images  
-has_many :projects, through :people_projects
+has_many :projects  
+has_many :rewards through :supports
 
 
 - #### projects table
@@ -37,11 +37,14 @@ has_many :projects, through :people_projects
 |:-----------------:|:-----------------:|:-----------------:|
 |name               |string|null: false|
 |area               |string|null: false|
+|title              |string|null: false|
+|content            |text  |null: false|
+|image              |string|null: false|
 
 ##### Association
 has_many :images  
-has_one  : reward  
-has_many :people, through :people_projects
+has_one  :reward  
+belongs_to :user
 
 
 - #### images table
@@ -53,7 +56,7 @@ has_many :people, through :people_projects
 
 ##### Association
 belongs_to :project  
-belongs_to :people
+belongs_to :user
 
 
 - #### rewards table
@@ -67,16 +70,16 @@ belongs_to :people
 |name            |string      |null: false|
 
 ##### Association
-belongs_to :project
+has_one :project  
+has_many :users, through: supports
 
-
-- #### people_projects table
+- #### supports table
 
 |__columun name__   |__type__             |__charactristics__|
 |:-----------------:|:-------------------:|:------------------:|
-|people             |integer|index: true, foreign_key: true|
-|projects           |integer|index: true, foreign_key: true|
+|user               |integer              |index: true, foreign_key: true|
+|reward             |integer              |index :true, foreign_key: true|
 
 ##### Association
-belongs_to :people  
-belongs_to :project
+belongs_to :user  
+belongs_to :reward
