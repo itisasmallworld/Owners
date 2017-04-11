@@ -7,7 +7,7 @@
 
 ## DataBase Design
 
-###Required Table
+### Required Table
 - people table
 - images table
 - projects table
@@ -17,9 +17,8 @@
 
 - #### people table
 
-|center align      |center align      |  center align      |
-|:----------------:|:----------------:|:------------------:|
 |__columun name__   |__type__         |__charactristics__  |
+|:----------------:|:----------------:|:------------------:|
 |name              |string            | null: false , unique: true       |
 |mail              | string           |null:false, unique: true|
 |password          |string            |null: false         |
@@ -32,9 +31,8 @@ has_many :projects, through :people_projects
 
 - #### projects table
 
-|center align       |center align       |center align       |
-|:-----------------:|:-----------------:|:-----------------:|
 |__columun name__    |__type__           |__charactristics__|
+|:-----------------:|:-----------------:|:-----------------:|
 |name               |string|null: false|
 |price              |integer|null: false|
 |quantity           |integer|null: false|
@@ -47,9 +45,8 @@ has_many :people, through :people_projects
 
 - #### images table
 
-|center align      |center align       |center align|
-|:----------------:|:-----------------:|:----------:|
 |__columun name__  |__type__           |__charactristics__|
+|:----------------:|:-----------------:|:----------:|
 |image             |string|null:false|
 |project_id        |integer|null: false|
 
@@ -61,9 +58,8 @@ belongs_to :people
 
 - #### people_projects table
 
-|center align       |center align         |center align        |
-|:-----------------:|:-------------------:|:------------------:|
 |__columun name__   |__type__             |__charactristics__|
+|:-----------------:|:-------------------:|:------------------:|
 |people             |integer|index: true, foreign_key: true|
 |projects           |integer|index: true, foreign_key: true|
 |role               |string|null: false|
